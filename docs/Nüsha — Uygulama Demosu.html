@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="tr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nüsha — Uygulama Demosu</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,700;1,500&family=Inter:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#f4eee4;--card:#fffaf2;--tx:#231c15;--mut:#85776a;--line:#e6dccd;--acc:#8a2f3b;--acc2:#fff7ef;--gold:#b8893a;--ser:'Fraunces',Georgia,serif;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14110e;--card:#1e1a16;--tx:#f2eadf;--mut:#a2957f;--line:#332c25;--acc:#d98a6c;--acc2:#1b130d}}
+:root[data-theme="dark"]{--bg:#14110e;--card:#1e1a16;--tx:#f2eadf;--mut:#a2957f;--line:#332c25;--acc:#d98a6c;--acc2:#1b130d}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;background:var(--bg);color:var(--tx);font:14px/1.45 Inter,system-ui,sans-serif}
+button{font:inherit;color:inherit;cursor:pointer}
+#app{max-width:430px;height:100%;margin:0 auto;display:flex;flex-direction:column;position:relative;overflow:hidden;background:var(--bg)}
+@media(min-width:600px){#app{border:1px solid var(--line);border-width:0 1px}}
+.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;vertical-align:middle}
+header{display:flex;align-items:center;justify-content:space-between;padding:12px 18px}
+.logo{font:italic 500 26px var(--ser);letter-spacing:-.5px}.logo b{color:var(--acc);font-style:normal}
+.ib{background:none;border:none;padding:6px;border-radius:50%}
+main{flex:1;overflow-y:auto;padding:4px 14px 28px;animation:in .3s}
+@keyframes in{from{opacity:0;transform:translateY(8px)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+h2{font:700 24px var(--ser);margin:6px 2px 12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;margin-bottom:16px;overflow:hidden}
+.top{display:flex;align-items:center;gap:10px;padding:12px}
+.av{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font:700 16px var(--ser);color:var(--acc2);background:hsl(var(--h) 35% 38%)}
+.nm{flex:1;line-height:1.2}.nm b{font-weight:600}.nm small{display:block;color:var(--mut);font-size:12px}
+.fl{border:1px solid var(--acc);color:var(--acc);background:none;border-radius:20px;padding:5px 13px;font-size:12px;font-weight:600}.fl.on{background:var(--acc);color:var(--acc2)}
+.cvw{position:relative;padding:6px 40px 18px;background:radial-gradient(120% 80% at 50% 0,hsl(var(--h) 30% 88%/.5),transparent)}
+.cv{position:relative;aspect-ratio:3/4;border-radius:3px 8px 8px 3px;color:#fff8ee;display:flex;flex-direction:column;justify-content:space-between;padding:22px 18px;box-shadow:inset 9px 0 8px -6px rgba(0,0,0,.45),0 14px 22px -10px rgba(0,0,0,.55),3px 0 0 #e9dfcd,4px 0 0 #cdbfa6;overflow:hidden;background:hsl(var(--h) 38% 30%)}
+.cv.k0{background:linear-gradient(180deg,hsl(var(--h) 40% 34%) 62%,hsl(var(--h) 45% 22%) 62%)}
+.cv.k1{background:radial-gradient(circle at 50% 38%,hsl(var(--h) 50% 48%) 0 24%,transparent 25%),hsl(var(--h) 38% 26%)}
+.cv.k2{background:repeating-linear-gradient(135deg,hsl(var(--h) 38% 30%) 0 12px,hsl(var(--h) 38% 25%) 12px 24px)}
+.cv.k3{background:radial-gradient(hsl(var(--h) 45% 42%) 2px,transparent 3px) 0 0/16px 16px,hsl(var(--h) 36% 24%)}
+.cv span{font:700 21px/1.15 var(--ser)}.cv small{font-size:10px;letter-spacing:2px;text-transform:uppercase;opacity:.8}
+.cv.s span{font-size:12px}.cv.s{padding:10px 8px}.cv.s small{display:none}
+.price{position:absolute;top:14px;right:14px;background:var(--acc);color:var(--acc2);font:700 17px var(--ser);padding:6px 13px;border-radius:20px 20px 20px 4px;box-shadow:0 3px 10px rgba(0,0,0,.3)}
+.cond{position:absolute;left:14px;bottom:20px;background:rgba(0,0,0,.6);color:#fff;font-size:11px;padding:3px 10px;border-radius:12px}
+.act{display:flex;align-items:center;gap:2px;padding:2px 8px}
+.act button{background:none;border:none;padding:8px;display:flex;gap:5px;align-items:center;font-size:13px;color:var(--mut)}
+.act .on{color:var(--acc)}.on .i{fill:currentColor}.pop .i{animation:pop .35s}@keyframes pop{50%{transform:scale(1.4)}}
+.sp{flex:1}.btn{background:var(--acc);color:var(--acc2);border:none;border-radius:14px;padding:11px 18px;font-weight:600}
+.btn.o{background:none;color:var(--acc);border:1px solid var(--acc)}
+.cap{padding:0 16px 14px}.cap b{font-weight:600}.quote{font:italic 500 15px/1.5 var(--ser)}
+.cms{border-top:1px solid var(--line);padding:10px 16px;font-size:13px}.cms p{margin-bottom:5px}.cms form{display:flex;gap:6px;margin-top:8px}
+input,textarea{width:100%;background:var(--bg);color:var(--tx);border:1px solid var(--line);border-radius:14px;padding:11px 14px;font:inherit}
+nav{display:flex;background:var(--card);border-top:1px solid var(--line);padding:4px 6px}
+nav button{flex:1;background:none;border:none;color:var(--mut);padding:8px 0;font-size:10px}nav button .i{display:block;margin:0 auto 2px}
+nav button.on{color:var(--acc);font-weight:600}nav .pl .i{background:var(--acc);color:var(--acc2);width:42px;height:30px;padding:5px 12px;border-radius:12px}
+.chips{display:flex;gap:6px;overflow-x:auto;margin:10px 0}.chips button{flex:none;border:1px solid var(--line);background:var(--card);border-radius:18px;padding:6px 14px;font-size:13px}.chips .on{background:var(--acc);color:var(--acc2);border-color:var(--acc)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px 12px}.grid .t{font:600 13px var(--ser);margin-top:6px}.grid .cv{aspect-ratio:3/4}.grid .pr{color:var(--acc);font-weight:700}
+.g3{grid-template-columns:repeat(3,1fr)}
+label{display:block;color:var(--mut);font-size:12px;margin:12px 0 4px}
+#ov{position:absolute;inset:0;background:var(--bg);z-index:4;display:none;flex-direction:column;animation:in .25s}#ov.show{display:flex}
+.bar{display:flex;align-items:center;gap:8px;padding:12px;border-bottom:1px solid var(--line)}.bar b{flex:1;font:700 17px var(--ser)}
+.ovb{flex:1;overflow-y:auto;padding:16px}
+.msgs{display:flex;flex-direction:column;gap:8px}.bb{max-width:78%;padding:9px 13px;border-radius:16px;background:var(--card);border:1px solid var(--line)}
+.bb.me{align-self:flex-end;background:var(--acc);color:var(--acc2);border:none}
+.of{align-self:center;width:84%;text-align:center;background:var(--card);border:1px dashed var(--acc);border-radius:16px;padding:12px}.of b{font:700 24px var(--ser);color:var(--acc);display:block}
+.of.acc{border-style:solid;border-color:var(--gold)}.of .r{display:flex;gap:8px;margin-top:10px}.of .r button{flex:1;padding:8px}
+.send{display:flex;gap:8px;padding:10px 12px;border-top:1px solid var(--line)}.send .btn{padding:0 14px}
+.sheet{position:absolute;inset:0;background:rgba(0,0,0,.5);display:none;align-items:flex-end;z-index:6}.sheet.show{display:flex}
+.sheet>div{background:var(--card);width:100%;border-radius:22px 22px 0 0;padding:20px 18px calc(20px + env(safe-area-inset-bottom,0px))}
+#toast{position:absolute;left:50%;bottom:80px;transform:translateX(-50%);background:var(--tx);color:var(--bg);padding:10px 18px;border-radius:22px;opacity:0;transition:opacity .25s;pointer-events:none;z-index:9;white-space:nowrap}#toast.show{opacity:1}
+.stats{display:flex;justify-content:space-around;margin:14px 0;text-align:center}.stats b{display:block;font:700 20px var(--ser)}.stats small{color:var(--mut)}
+.note{color:var(--mut);font-size:12px;text-align:center;margin:10px 0}.mr{display:flex;gap:12px;align-items:center;padding:12px;background:var(--card);border:1px solid var(--line);border-radius:16px;margin-bottom:8px}.mr div:nth-child(2){flex:1;color:var(--mut);font-size:13px}.mr b{color:var(--tx);display:block}
+</style></head><body>
+<svg width="0" height="0" style="position:absolute"><defs>
+<symbol id="home" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v9a1 1 0 01-1 1h-5v-6H9v6H4a1 1 0 01-1-1z"/></symbol>
+<symbol id="search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-5-5"/></symbol>
+<symbol id="plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="chat" viewBox="0 0 24 24"><path d="M21 12a8 8 0 01-11.5 7.2L3 21l1.8-5.5A8 8 0 1121 12z"/></symbol>
+<symbol id="user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0116 0"/></symbol>
+<symbol id="heart" viewBox="0 0 24 24"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 018-2.8A4.5 4.5 0 0120 10c0 5.8-8 11-8 11z"/></symbol>
+<symbol id="cm" viewBox="0 0 24 24"><path d="M21 12a8 8 0 01-8 8H4l2-4a8 8 0 1115-4z"/></symbol>
+<symbol id="bm" viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4z"/></symbol>
+<symbol id="back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
+<symbol id="send" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/></symbol>
+<symbol id="moon" viewBox="0 0 24 24"><path d="M21 13A9 9 0 1111 3a7 7 0 0010 10z"/></symbol>
+</defs></svg>
+<div id="app">
+<header><div class="logo">nüsha<b>.</b></div><button class="ib" id="th" aria-label="Tema"><svg class="i"><use href="#moon"/></svg></button></header>
+<main id="main"></main>
+<nav id="nav"></nav>
+<div id="ov"></div><div class="sheet" id="sh"><div id="shb"></div></div><div id="toast"></div>
+</div>
+<script>
+const E=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const ic=n=>`<svg class="i"><use href="#${n}"/></svg>`,$=s=>document.querySelector(s);
+const B=[
+{id:1,t:"Suç ve Ceza",a:"Dostoyevski",p:95,c:"Çok iyi",k:"Roman",u:"Elif",ci:"İstanbul",tm:"24 dk",n:"Raskolnikov'un vicdan muhasebesi beni iki gün kendime getirmedi. Temiz, altı çizili yer yok.",l:42,cm:[["Mert","Efsane kitap, pazarlık olur mu?"]]},
+{id:2,t:"Tutunamayanlar",a:"Oğuz Atay",p:140,c:"İyi",k:"Roman",u:"Burak",ci:"Ankara",tm:"2 sa",n:"Bitirmesi zor ama pişman etmiyor. Kenarlarına notlar aldım.",l:87,cm:[]},
+{id:3,t:"Küçük Prens",a:"Saint-Exupéry",p:45,c:"Yeni gibi",k:"Çocuk",u:"Zeynep",ci:"İzmir",tm:"5 sa",n:"Her yaşta başka okunuyor. Hediyelik duruyor.",l:31,cm:[["Ece","Kargo dahil mi?"]]},
+{id:4,t:"1984",a:"George Orwell",p:70,c:"İyi",k:"Distopya",u:"Can",ci:"Bursa",tm:"Dün",n:"Bu yıl okuduğum en rahatsız edici ve en gerekli kitap.",l:56,cm:[]},
+{id:5,t:"Sofie'nin Dünyası",a:"Jostein Gaarder",p:85,c:"İyi",k:"Felsefe",u:"Selin",ci:"Eskişehir",tm:"Dün",n:"Felsefeye giriş için hâlâ en keyifli yol.",l:24,cm:[]},
+{id:6,t:"Kürk Mantolu Madonna",a:"Sabahattin Ali",p:55,c:"Çok iyi",k:"Roman",u:"Mert",ci:"Konya",tm:"2 gün",n:"Bir solukta bitirdim, sonunu unutamıyorum.",l:103,cm:[]}];
+const H=u=>[...u].reduce((s,c)=>s+c.charCodeAt(0),0)*37%360,hue=b=>(b.id*53+10)%360;
+const S={v:"feed",lk:new Set(),sv:new Set(),fw:new Set(),op:new Set(),mine:[],q:"",cat:"Hepsi",nid:10,ch:null,dt:null,
+th:[{id:1,u:"Selin",b:5,m:[{f:"them",t:"Merhaba, kitap hâlâ duruyor mu?"}]}],
+dr:{t:"",a:"",p:"",n:"",c:"İyi",k:"Roman"}};
+const cover=(b,s)=>`<div class="cv k${b.id%4} ${s?"s":""}" style="--h:${hue(b)}"><span>${E(b.t||"Kitap adı")}</span><small>${E(b.a||"Yazar")}</small></div>`;
+const av=u=>`<div class="av" style="--h:${H(u)}">${E(u[0])}</div>`;
+function toast(m){const t=$("#toast");t.textContent=m;t.className="show";clearTimeout(toast.k);toast.k=setTimeout(()=>t.className="",1900)}
+const NAV=[["feed","home","Akış"],["exp","search","Keşfet"],["add","plus","İlan Ver"],["msg","chat","Mesajlar"],["me","user","Profil"]];
+function feed(){return B.map(b=>{const L=S.lk.has(b.id),me=b.u==="Sen";return `<div class="card"><div class="top">${av(b.u)}<div class="nm"><b>${E(b.u)}</b><small>${E(b.ci)} · ${b.tm}</small></div>${me?"":`<button class="fl ${S.fw.has(b.u)?"on":""}" data-a="fw" data-u="${E(b.u)}">${S.fw.has(b.u)?"Takipte":"Takip et"}</button>`}</div>
+<div class="cvw" data-a="dt" data-id="${b.id}">${cover(b)}<div class="price">₺${b.p}</div><div class="cond">${E(b.c)}</div></div>
+<div class="act"><button class="${L?"on":""}" data-a="lk" data-id="${b.id}">${ic("heart")}${b.l+(L?1:0)}</button><button data-a="cm" data-id="${b.id}">${ic("cm")}${b.cm.length}</button><button class="${S.sv.has(b.id)?"on":""}" data-a="sv" data-id="${b.id}">${ic("bm")}</button><span class="sp"></span>${me?`<small style="color:var(--mut);padding-right:8px">Senin ilanın</small>`:`<button class="btn" data-a="of" data-id="${b.id}">Teklif Ver</button>`}</div>
+<div class="cap"><p class="quote">“${E(b.n)}”</p></div>
+${S.op.has(b.id)?`<div class="cms">${b.cm.map(c=>`<p><b>${E(c[0])}</b> ${E(c[1])}</p>`).join("")||`<p style="color:var(--mut)">İlk yorumu sen yaz.</p>`}<form data-id="${b.id}"><input placeholder="Yorum ekle…" maxlength="140"><button class="btn">Gönder</button></form></div>`:""}</div>`}).join("")}
+function exp(){const L=B.filter(b=>(S.cat==="Hepsi"||b.k===S.cat)&&(b.t+b.a+b.u).toLowerCase().includes(S.q.toLowerCase()));
+return `<h2>Keşfet</h2><input id="q" value="${E(S.q)}" placeholder="Kitap, yazar veya satıcı ara…"><div class="chips">${["Hepsi","Roman","Felsefe","Çocuk","Distopya"].map(c=>`<button class="${S.cat===c?"on":""}" data-a="cat" data-c="${c}">${c}</button>`).join("")}</div>
+<div class="grid">${L.map(b=>`<div data-a="dt" data-id="${b.id}">${cover(b)}<div class="t">${E(b.t)}</div><small>${E(b.u)} · ${E(b.ci)}</small> <span class="pr">₺${b.p}</span></div>`).join("")||`<p class="note" style="grid-column:1/-1">Sonuç yok.</p>`}</div>`}
+function add(){const d=S.dr;return `<h2>Yeni ilan</h2><div class="card"><div class="cvw">${cover({id:7,t:d.t,a:d.a})}<div class="price">₺${E(d.p||"0")}</div><div class="cond">${E(d.c)}</div></div></div>
+<p class="note">Gerçek uygulamada kapak fotoğrafı kamerayla çekilir.</p>
+<label>Kitap adı</label><input id="ft" value="${E(d.t)}" maxlength="50" placeholder="Örn. Sefiller"><label>Yazar</label><input id="fa" value="${E(d.a)}" maxlength="40">
+<label>Durum</label><div class="chips">${["Yeni gibi","Çok iyi","İyi","Yıpranmış"].map(x=>`<button data-a="fc" data-c="${x}" class="${d.c===x?"on":""}">${x}</button>`).join("")}</div>
+<label>Fiyat (₺)</label><input id="fp" type="number" inputmode="numeric" value="${E(d.p)}" placeholder="80">
+<label>Bu kitap sana ne hissettirdi?</label><textarea id="fn" rows="3" maxlength="200">${E(d.n)}</textarea>
+<button class="btn" data-a="pub" style="width:100%;margin-top:16px">Yayınla</button>`}
+function msg(){return `<h2>Mesajlar</h2>`+S.th.map(t=>{const l=t.m[t.m.length-1];return `<div class="mr" data-a="ch" data-id="${t.id}">${av(t.u)}<div><b>${E(t.u)}</b>${l.o?`Teklif: ₺${l.o.v}`:E(l.t)}</div></div>`}).join("")}
+function me(){return `<div style="text-align:center;padding-top:8px"><div class="av" style="--h:20;width:78px;height:78px;font-size:32px;margin:0 auto 8px">S</div><b style="font:700 20px var(--ser)">Sen</b><p style="color:var(--mut)">Okur · Satıcı · Bursa</p></div>
+<div class="stats"><div><b>${S.mine.length}</b><small>İlan</small></div><div><b>128</b><small>Takipçi</small></div><div><b>${34+S.fw.size}</b><small>Takip</small></div></div>
+${S.mine.length?`<div class="grid g3">${S.mine.map(b=>`<div data-a="dt" data-id="${b.id}">${cover(b,1)}</div>`).join("")}</div>`:`<p class="note">Henüz ilanın yok. Artı butonuyla ilk kitabını sat.</p>`}`}
+function render(){$("#main").innerHTML={feed,exp,add,msg,me}[S.v]();$("#nav").innerHTML=NAV.map(n=>`<button class="${S.v===n[0]?"on":""} ${n[0]==="add"?"pl":""}" data-v="${n[0]}">${ic(n[1])}${n[2]}</button>`).join("");ov()}
+function ov(){const o=$("#ov");if(S.dt){const b=B.find(x=>x.id===S.dt),me=b.u==="Sen";o.className="show";
+o.innerHTML=`<div class="bar"><button class="ib" data-a="x">${ic("back")}</button><b>${E(b.t)}</b></div><div class="ovb"><div class="cvw" style="padding-top:0">${cover(b)}<div class="price">₺${b.p}</div></div>
+<p style="text-align:center;color:var(--mut)">${E(b.a)} · ${E(b.k)} · ${E(b.c)}</p><div class="top" style="padding:14px 0">${av(b.u)}<div class="nm"><b>${E(b.u)}</b><small>${E(b.ci)} · ★ 4.9 · 23 satış</small></div></div>
+<p class="quote">“${E(b.n)}”</p>${me?"":`<div style="display:flex;gap:8px;margin-top:20px"><button class="btn o" data-a="chb" data-id="${b.id}" style="flex:1">Mesaj yaz</button><button class="btn" data-a="of" data-id="${b.id}" style="flex:1">Teklif ver</button></div>`}<p class="note">Güvenli ödeme ve kargo sonraki sürümde eklenecek.</p></div>`}
+else if(S.ch){const t=S.th.find(x=>x.id===S.ch),b=B.find(x=>x.id===t.b);o.className="show";
+o.innerHTML=`<div class="bar"><button class="ib" data-a="x">${ic("back")}</button>${av(t.u)}<b>${E(t.u)}<small style="display:block;font:400 12px Inter;color:var(--mut)">${E(b.t)} · ₺${b.p}</small></b></div><div class="ovb" id="cb"><div class="msgs">${t.m.map((m,i)=>m.o?`<div class="of ${m.o.st==="acc"?"acc":""}"><small>${m.f==="me"?"Senin teklifin":E(t.u)+" karşı teklif"}</small><b>₺${m.o.v}</b>${{wait:"Yanıt bekleniyor…",acc:"✓ Kabul edildi",old:"Karşı teklif geldi",rej:"Reddedildi"}[m.o.st]||""}${m.o.st==="cnt"?`<div class="r"><button class="btn" data-a="ac" data-i="${i}">Kabul et</button><button class="btn o" data-a="rj" data-i="${i}">Reddet</button></div>`:""}${m.o.st==="acc"?`<div class="r"><button class="btn" data-a="pay">Güvenli öde</button></div>`:""}</div>`:`<div class="bb ${m.f}">${E(m.t)}</div>`).join("")}</div></div>
+<form class="send" data-a="snd"><input placeholder="Mesaj yaz…"><button class="btn">${ic("send")}</button></form>`;const c=$("#cb");c.scrollTop=c.scrollHeight}
+else{o.className="";o.innerHTML=""}}
+function thread(bid){let t=S.th.find(x=>x.b===bid);if(!t){const b=B.find(x=>x.id===bid);t={id:S.nid++,u:b.u,b:bid,m:[]};S.th.unshift(t)}return t}
+function offer(b){$("#shb").innerHTML=`<h2 style="margin:0">${E(b.t)}</h2><p style="color:var(--mut);margin-bottom:12px">İstenen fiyat ₺${b.p}</p><input id="ovv" type="number" inputmode="numeric" value="${Math.round(b.p*.85)}"><div class="chips">${[.9,.8,.7].map(r=>`<button data-a="qv" data-v="${Math.round(b.p*r)}">₺${Math.round(b.p*r)}</button>`).join("")}</div><button class="btn" data-a="go" data-id="${b.id}" style="width:100%">Teklifi gönder</button>`;$("#sh").classList.add("show")}
+function reply(t,i){setTimeout(()=>{const m=t.m[i],b=B.find(x=>x.id===t.b);if(m.o.v>=b.p*.85){m.o.st="acc";t.m.push({f:"them",t:"Anlaştık, teşekkürler! 🎉"})}else{m.o.st="old";t.m.push({f:"them",o:{v:Math.round(b.p*.92),st:"cnt"}})}
+if(S.ch===t.id)ov();else toast(t.u+" teklifine yanıt verdi")},1500)}
+document.addEventListener("click",e=>{
+if(e.target.id==="sh")return $("#sh").classList.remove("show");
+const v=e.target.closest("[data-v]");if(v){S.v=v.dataset.v;S.dt=S.ch=null;render();$("#main").scrollTop=0;return}
+const a=e.target.closest("[data-a]");if(!a||a.tagName==="FORM")return;const k=a.dataset.a,id=+a.dataset.id,b=B.find(x=>x.id===id);
+if(k==="lk"){S.lk.has(id)?S.lk.delete(id):S.lk.add(id);render();document.querySelector(`[data-a=lk][data-id="${id}"]`)?.classList.add("pop");return}
+if(k==="sv"){S.sv.has(id)?S.sv.delete(id):(S.sv.add(id),toast("Kaydedildi"))}
+if(k==="cm")S.op.has(id)?S.op.delete(id):S.op.add(id);
+if(k==="fw"){const u=a.dataset.u;S.fw.has(u)?S.fw.delete(u):S.fw.add(u)}
+if(k==="cat")S.cat=a.dataset.c;
+if(k==="fc")S.dr.c=a.dataset.c;
+if(k==="dt")S.dt=id;
+if(k==="x")S.dt=S.ch=null;
+if(k==="ch")S.ch=id;
+if(k==="chb"){S.ch=thread(id).id;S.dt=null}
+if(k==="of"){offer(b);return}
+if(k==="qv"){$("#ovv").value=a.dataset.v;return}
+if(k==="go"){const x=+$("#ovv").value;if(!(x>0))return toast("Geçerli bir tutar gir");const t=thread(id);t.m.push({f:"me",o:{v:x,st:"wait"}});$("#sh").classList.remove("show");S.dt=null;S.ch=t.id;reply(t,t.m.length-1);toast("Teklif gönderildi");render();return}
+if(k==="ac"||k==="rj"){const t=S.th.find(x=>x.id===S.ch),m=t.m[+a.dataset.i];m.o.st=k==="ac"?"acc":"rej";t.m.push({f:"me",t:k==="ac"?"Kabul ediyorum 👍":"Kusura bakma, bu fiyata olmaz."})}
+if(k==="pay")return toast("Güvenli ödeme sonraki fazda");
+if(k==="pub"){const d=S.dr;if(!d.t.trim()||!(+d.p>0))return toast("Kitap adı ve fiyat gerekli");const n={id:S.nid++,t:d.t.trim(),a:d.a.trim()||"Bilinmeyen yazar",p:Math.round(+d.p),c:d.c,k:d.k,u:"Sen",ci:"Bursa",tm:"şimdi",n:d.n.trim()||"Okudum, yeni sahibini arıyor.",l:0,cm:[]};B.unshift(n);S.mine.unshift(n);S.dr={t:"",a:"",p:"",n:"",c:"İyi",k:"Roman"};S.v="feed";toast("İlanın yayında 🎉")}
+render()});
+document.addEventListener("input",e=>{const i=e.target.id;if(i==="q"){S.q=e.target.value;const p=e.target.selectionStart;render();const q=$("#q");q.focus();q.setSelectionRange(p,p);return}
+const m={ft:"t",fa:"a",fp:"p",fn:"n"}[i];if(!m)return;S.dr[m]=e.target.value;if(m==="n")return;const p=e.target.selectionStart;render();const el=document.getElementById(i);el.focus();try{el.setSelectionRange(p,p)}catch(_){}});
+document.addEventListener("submit",e=>{e.preventDefault();const f=e.target,x=f.querySelector("input").value.trim();if(!x)return;
+if(f.dataset.a==="snd"){const t=S.th.find(y=>y.id===S.ch);t.m.push({f:"me",t:x});ov();setTimeout(()=>{t.m.push({f:"them",t:"Tamamdır, bakıp döneyim 🙂"});if(S.ch===t.id)ov()},1200)}
+else{B.find(b=>b.id===+f.dataset.id).cm.push(["Sen",x]);render()}});
+$("#th").onclick=()=>{const r=document.documentElement;r.dataset.theme=(r.dataset.theme||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light"))==="dark"?"light":"dark"};
+render();
+</script></body></html>
